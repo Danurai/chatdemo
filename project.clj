@@ -1,11 +1,11 @@
-(defproject solo "0.1.0-SNAPSHOT"
-  :description "Simple app written in Clojure and ClojureScript"
-  :url "http://example.com/FIXME"
+(defproject chatdemo  "0.1.0-SNAPSHOT"
+  :description       "Simple app written in Clojure and ClojureScript"
+  :url              "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
 ;; Update to your namespace            
-  :main solo.system
+  :main chatdemo.system
   
   :dependencies [[org.clojure/clojure "1.8.0"]
                [org.clojure/clojurescript "1.9.946"]
@@ -27,7 +27,7 @@
                              :figwheel true
                              :compiler {:output-to "target/classes/public/app.js"
                                        :output-dir "target/classes/public/out"
-                                       :main "solo.client"
+                                       :main "chatdemo.client"
                                        :asset-path "/out"
                                        :optimizations :none
                                        :recompile-dependents true

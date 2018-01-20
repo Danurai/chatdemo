@@ -1,5 +1,5 @@
 (ns user
   (:require [reloaded.repl :refer [system reset stop]]
-           [solo.system]))
+           [chatdemo.system]))
 
-(reloaded.repl/set-init! #'solo.system/create-system)
+(reloaded.repl/set-init! #'chatdemo.system/create-system)
