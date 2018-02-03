@@ -1,10 +1,11 @@
-(defproject chatdemo  "0.1.0-SNAPSHOT"
-  :description       "Simple app written in Clojure and ClojureScript"
-  :url              "http://example.com/FIXME"
+(defproject chatdemo "0.1.0-SNAPSHOT"
+  :description "Simple app written in Clojure and ClojureScript"
+  :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-
-;; Update to your namespace            
+  
+  :min-lein-version "2.7.1"
+  
   :main chatdemo.system
   
   :dependencies [[org.clojure/clojure "1.8.0"]
@@ -16,19 +17,30 @@
 					[jarohen/chord "0.8.1"]
 					[org.clojure/core.async "0.3.465"]]
                
- 	:profiles {:dev 
-               {:plugins [[lein-cljsbuild "1.1.7"]
-                         [lein-figwheel "0.5.14"]]
-                :dependencies [[reloaded.repl "0.2.4"]]
-                :source-paths ["dev"]
-                :cljsbuild 
-                   {:builds [{:id dev
-                             :source-paths ["src" "dev"]
-                             :figwheel true
-                             :compiler {:output-to "target/classes/public/app.js"
-                                       :output-dir "target/classes/public/out"
-                                       :main "chatdemo.client"
-                                       :asset-path "/out"
-                                       :optimizations :none
-                                       :recompile-dependents true
-                                       :source-map true}}]}}})
+   
+   :figwheel {:css-dirs ["resources/public/css"]} ;; watch and update CSS     
+   :source-paths ["src"]
+ 	:profiles {:uberjar {:aot :all}  
+             :dev {:plugins [[lein-cljsbuild "1.1.7"]
+                           [lein-figwheel "0.5.14"]]
+                  :dependencies [[reloaded.repl "0.2.4"]]
+                  :source-paths ["dev"]}}
+
+
+   :cljsbuild  {:builds [{:id "dev"
+                        :source-paths ["src" "dev"]
+                        :figwheel true
+                        :compiler {:output-to "target/classes/public/app.js"
+                                  :output-dir "target/classes/public/out"
+                                  :main "chatdemo.client"
+                                  :asset-path "/out"
+                                  :optimizations :none
+                                  :recompile-dependents true
+                                  :source-map true}}
+                        {:id "min"
+                         :source-paths ["src"]
+                         :compiler {:output-to "resources/public/app.js"
+                                  :main "chatdemo.client"
+                                  :optimizations :advanced
+                                  :pretty-print false}}]})
+                                                    

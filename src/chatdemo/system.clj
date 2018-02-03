@@ -1,7 +1,8 @@
 (ns chatdemo.system
-  (:require [org.httpkit.server :refer [run-server]]
-			  [com.stuartsierra.component :as component]
-           [chatdemo.web :refer [app]]))
+   (:gen-class)
+   (:require [org.httpkit.server :refer [run-server]]
+            [com.stuartsierra.component :as component]
+            [chatdemo.web :refer [app]]))
 
 (defn- start-server [handler port]
   (let [server (run-server handler {:port port})]
@@ -12,7 +13,7 @@
   (when server
     (server))) ;; run-server returns a fn that stops itself
     
-(defrecord Solo []
+(defrecord ChatDemo []
   component/Lifecycle
   (start [this]
     (assoc this :server (start-server #'app 9009)))
@@ -21,7 +22,7 @@
     (dissoc this :server)))
 
 (defn create-system []
-  (Solo.))
+  (ChatDemo.))
 
 (defn -main [& args]   
   (.start (create-system)))
